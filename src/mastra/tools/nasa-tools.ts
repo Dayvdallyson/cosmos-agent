@@ -5,7 +5,6 @@ import { NasaClient } from '../infrastructure/nasa/NasaClient';
 import { ApodService } from '../application/nasa/ApodService';
 import { MarsRoverService, ROVER_NAMES } from '../application/nasa/MarsRoverService';
 
-// Composition root: one Singleton client shared by every service.
 const client = NasaClient.getInstance();
 const apodService = new ApodService(client);
 const marsRoverService = new MarsRoverService(client);
@@ -29,7 +28,7 @@ export const apodTool = createTool({
     mediaType: z.string(),
     copyright: z.string().optional(),
   }),
-  // v1 signature: (inputData, context). We only need inputData here.
+
   execute: async ({ date }) => {
     const apod = await apodService.getByDate(date);
     return {
