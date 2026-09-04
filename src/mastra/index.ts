@@ -9,13 +9,14 @@ import {
   SensitiveDataFilter,
 } from '@mastra/observability';
 import { agent } from './agents/agent';
+import  { nasaAgent } from './agents/nasa'
 import { startScheduleTool, stopScheduleTool } from './tools/schedule-tools';
 
 export const mastra = new Mastra({
   bundler: {
     externals: ['@duckdb/node-bindings'],
   },
-  agents: { agent },
+  agents: { agent, nasaAgent },
   tools: { startScheduleTool, stopScheduleTool },
   storage: new MastraCompositeStore({
     id: 'composite-storage',
